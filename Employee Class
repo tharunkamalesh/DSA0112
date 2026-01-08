@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+    int empId;
+    string empName;
+    float basicSalary, grossSalary;
+
+public:
+    // Read employee details
+    void getData() {
+        cout << "Enter Employee ID: ";
+        cin >> empId;
+
+        cout << "Enter Employee Name: ";
+        cin >> empName;
+
+        cout << "Enter Basic Salary: ";
+        cin >> basicSalary;
+    }
+
+    // Calculate gross salary
+    void calculateSalary() {
+        float hra = 0.20 * basicSalary;  // 20% HRA
+        float da  = 0.10 * basicSalary;  // 10% DA
+        grossSalary = basicSalary + hra + da;
+    }
+
+    // Display employee details
+    void display() {
+        cout << "\nEmployee Details\n";
+        cout << "Employee ID   : " << empId << endl;
+        cout << "Employee Name : " << empName << endl;
+        cout << "Basic Salary  : " << basicSalary << endl;
+        cout << "Gross Salary  : " << grossSalary << endl;
+    }
+};
+
+int main() {
+    Employee emp;
+
+    emp.getData();
+    emp.calculateSalary();
+    emp.display();
+
+    return 0;
+}
