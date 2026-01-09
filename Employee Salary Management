@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+private:
+    int empId;
+    string name;
+    float basicPay;
+    float hra, da;
+    float grossSalary;
+
+public:
+    // Read employee details
+    void getData() {
+        cout << "Enter Employee ID: ";
+        cin >> empId;
+
+        cout << "Enter Employee Name: ";
+        cin >> name;
+
+        cout << "Enter Basic Pay: ";
+        cin >> basicPay;
+    }
+
+    // Calculate gross salary
+    void calculateSalary() {
+        hra = 0.20 * basicPay;   // 20% HRA
+        da  = 0.10 * basicPay;   // 10% DA
+        grossSalary = basicPay + hra + da;
+    }
+
+    // Display pay slip
+    void displayPaySlip() {
+        cout << "\nEmployee ID   : " << empId;
+        cout << "\nName          : " << name;
+        cout << "\nBasic Pay     : " << basicPay;
+        cout << "\nHRA           : " << hra;
+        cout << "\nDA            : " << da;
+        cout << "\nGross Salary  : " << grossSalary << endl;
+    }
+
+    // Return gross salary
+    float getGrossSalary() {
+        return grossSalary;
+    }
+};
+
+int main() {
+    int n;
+    float limit, totalSalary = 0;
+
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    Employee emp[n];
+
+    // Input employee details
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details of Employee " << i + 1 << endl;
+        emp[i].getData();
+        emp[i].calculateSalary();
+    }
+
+    // Display all pay slips
+    cout << "\n--- PAY SLIPS ---\n";
+    for (int i = 0; i < n; i++) {
+        emp[i].displayPaySlip();
+        totalSalary += emp[i].getGrossSalary();
+    }
+
+    // Display employees with gross salary above a given value
+    cout << "\nEnter salary limit: ";
+    cin >> limit;
+
+    cout << "\nEmployees with Gross Salary above " << limit << ":\n";
+    for (int i = 0; i < n; i++) {
+        if (emp[i].getGrossSalary() > limit) {
+            emp[i].displayPaySlip();
+        }
+    }
+
+    // Total salary expenditure
+    cout << "\nTotal Salary Expenditure of Company: " << totalSalary << endl;
+
+    return 0;
+}
