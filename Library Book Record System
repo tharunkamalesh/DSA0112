@@ -1,0 +1,95 @@
+#include <iostream>
+using namespace std;
+
+class Book {
+private:
+    int bookId;
+    string title;
+    string author;
+    float price;
+
+public:
+    // Accept book details
+    void accept() {
+        cout << "Enter Book ID: ";
+        cin >> bookId;
+
+        cout << "Enter Book Title: ";
+        cin >> title;
+
+        cout << "Enter Author Name: ";
+        cin >> author;
+
+        cout << "Enter Book Price: ";
+        cin >> price;
+    }
+
+    // Display book details
+    void display() {
+        cout << "\nBook ID   : " << bookId;
+        cout << "\nTitle     : " << title;
+        cout << "\nAuthor    : " << author;
+        cout << "\nPrice     : " << price << endl;
+    }
+
+    // Check title
+    bool isTitleMatch(string searchTitle) {
+        return title == searchTitle;
+    }
+
+    // Check price condition
+    bool isPriceBelow(float amount) {
+        return price < amount;
+    }
+};
+
+int main() {
+    int n;
+    float limit;
+    string searchTitle;
+
+    cout << "Enter number of books: ";
+    cin >> n;
+
+    Book books[n];
+
+    // Accept book records
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details of Book " << i + 1 << endl;
+        books[i].accept();
+    }
+
+    // Display all books
+    cout << "\n--- All Book Records ---\n";
+    for (int i = 0; i < n; i++) {
+        books[i].display();
+    }
+
+    // Search by title
+    cout << "\nEnter title to search: ";
+    cin >> searchTitle;
+
+    bool found = false;
+    for (int i = 0; i < n; i++) {
+        if (books[i].isTitleMatch(searchTitle)) {
+            books[i].display();
+            found = true;
+        }
+    }
+
+    if (!found)
+        cout << "Book not found!" << endl;
+
+    // Display books below given price
+    cout << "\nEnter price limit: ";
+    cin >> limit;
+
+    cout << "\nBooks priced below " << limit << ":\n";
+    for (int i = 0; i < n; i++) {
+        if (books[i].isPriceBelow(limit)) {
+            books[i].display();
+        }
+    }
+
+    return 0;
+}
